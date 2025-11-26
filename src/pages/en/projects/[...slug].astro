@@ -1,0 +1,49 @@
+---
+import { type CollectionEntry, getCollection } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+	const projects = await getCollection('projects', ({ data }) => data.lang === 'en');
+	return projects.map((project) => ({
+		params: { slug: project.slug },
+		props: project,
+	}));
+}
+type Props = CollectionEntry<'projects'>;
+
+const project = Astro.props;
+const { Content } = await project.render();
+---
+
+<Layout title={project.data.title} description={project.data.description}>
+    <article class="py-12 prose prose-lg max-w-none">
+        <div class="mb-8 border-b border-gray-200 pb-8">
+            <h1 class="mb-4 text-4xl font-bold">{project.data.title}</h1>
+            <p class="text-xl text-gray-600 mb-6">{project.data.description}</p>
+            
+            <div class="flex flex-wrap gap-4 items-center justify-between">
+                <div class="flex gap-2">
+                    {project.data.tags.map((tag) => (
+                        <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium">
+                            {tag}
+                        </span>
+                    ))}
+                </div>
+                
+                <div class="flex gap-4">
+                    {project.data.repo && (
+                        <a href={project.data.repo} target="_blank" rel="noopener noreferrer" class="font-medium hover:text-primary">
+                            GitHub &rarr;
+                        </a>
+                    )}
+                    {project.data.link && (
+                        <a href={project.data.link} target="_blank" rel="noopener noreferrer" class="font-medium hover:text-primary">
+                            Demo &rarr;
+                        </a>
+                    )}
+                </div>
+            </div>
+        </div>
+        <Content />
+    </article>
+</Layout>

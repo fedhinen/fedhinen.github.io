@@ -1,0 +1,67 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { useTranslations } from '../../../../i18n/utils';
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('blog', ({ data }) => data.lang === 'en');
+  const uniqueTags = [...new Set(allPosts.map((post) => post.data.tags).flat())].filter(Boolean);
+
+  return uniqueTags.map((tag) => {
+    const filteredPosts = allPosts.filter((post) => post.data.tags?.includes(tag as string));
+    return {
+      params: { tag },
+      props: { posts: filteredPosts },
+    };
+  });
+}
+
+const { tag } = Astro.params;
+const { posts } = Astro.props;
+const t = useTranslations('en');
+
+const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<Layout title={`Blog - #${tag}`}>
+    <section class="py-12">
+        <div class="mb-8 flex items-center gap-4">
+            <a href="/en/blog" class="text-sm text-gray-500 hover:text-primary">&larr; {t('nav.blog')}</a>
+            <h1 class="text-4xl font-bold">#{tag}</h1>
+        </div>
+        
+        <div class="grid gap-8">
+            {sortedPosts.map((post) => (
+                <article class="flex flex-col gap-2 border-b border-gray-200 pb-8">
+                    <div class="flex items-center gap-4 text-sm text-gray-500 mb-1">
+                        <time datetime={post.data.pubDate.toISOString()}>
+                            {post.data.pubDate.toLocaleDateString('en', {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric',
+                            })}
+                        </time>
+                        {post.data.tags && (
+                            <div class="flex gap-2">
+                                {post.data.tags.map((t) => (
+                                    <span class={`text-primary ${t === tag ? 'font-bold underline' : ''}`}>#{t}</span>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                    <h2 class="text-2xl font-bold hover:text-primary transition-colors">
+                        <a href={`/en/blog/${post.slug}`} class="no-underline">
+                            {post.data.title}
+                        </a>
+                    </h2>
+                    <p class="text-gray-600 leading-relaxed">
+                        {post.data.description}
+                    </p>
+                    <a href={`/en/blog/${post.slug}`} class="text-sm font-bold mt-2 inline-flex items-center gap-1 hover:gap-2 transition-all">
+                        {t('blog.readMore')} &rarr;
+                    </a>
+                </article>
+            ))}
+        </div>
+    </section>
+</Layout>

@@ -1,0 +1,102 @@
+<div id="canvas-container" class="fixed inset-0 -z-10 opacity-40 pointer-events-none"></div>
+
+<script>
+  import * as THREE from 'three';
+
+  const container = document.getElementById('canvas-container');
+
+  if (container) {
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    container.appendChild(renderer.domElement);
+
+    // Geometries representing Math/Chess/Drawing
+    const geometries = [
+      new THREE.IcosahedronGeometry(1, 0), // Math
+      new THREE.ConeGeometry(0.8, 1.5, 4), // Chess piece abstract
+      new THREE.TorusGeometry(0.8, 0.2, 16, 100) // Drawing/Circle
+    ];
+
+    const material = new THREE.MeshBasicMaterial({ 
+      color: 0x121214, 
+      wireframe: true,
+      transparent: true,
+      opacity: 0.08
+    });
+
+    const objects: THREE.Mesh[] = [];
+
+    // Create floating objects
+    for (let i = 0; i < 20; i++) {
+      const geometry = geometries[Math.floor(Math.random() * geometries.length)];
+      const mesh = new THREE.Mesh(geometry, material);
+      
+      mesh.position.x = (Math.random() - 0.5) * 40;
+      mesh.position.y = (Math.random() - 0.5) * 40;
+      mesh.position.z = (Math.random() - 0.5) * 20 - 10;
+      
+      mesh.rotation.x = Math.random() * Math.PI;
+      mesh.rotation.y = Math.random() * Math.PI;
+      
+      const scale = Math.random() * 0.5 + 0.5;
+      mesh.scale.set(scale, scale, scale);
+
+      scene.add(mesh);
+      objects.push(mesh);
+    }
+
+    camera.position.z = 5;
+
+    // Mouse interaction
+    let mouseX = 0;
+    let mouseY = 0;
+    let targetX = 0;
+    let targetY = 0;
+
+    const windowHalfX = window.innerWidth / 2;
+    const windowHalfY = window.innerHeight / 2;
+
+    document.addEventListener('mousemove', (event) => {
+      mouseX = (event.clientX - windowHalfX) * 0.001;
+      mouseY = (event.clientY - windowHalfY) * 0.001;
+    });
+
+    const clock = new THREE.Clock();
+
+    function animate() {
+      requestAnimationFrame(animate);
+
+      const elapsedTime = clock.getElapsedTime();
+
+      targetX = mouseX * 0.5;
+      targetY = mouseY * 0.5;
+
+      objects.forEach((obj, i) => {
+        obj.rotation.x += 0.001 * (i % 2 === 0 ? 1 : -1);
+        obj.rotation.y += 0.002;
+        
+        // Gentle floating movement
+        obj.position.y += Math.sin(elapsedTime * 0.5 + i) * 0.002;
+      });
+
+      // Smooth camera movement based on mouse
+      scene.rotation.x += 0.05 * (targetY - scene.rotation.x);
+      scene.rotation.y += 0.05 * (targetX - scene.rotation.y);
+
+      renderer.render(scene, camera);
+    }
+
+    animate();
+
+    // Handle resize
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  }
+</script>

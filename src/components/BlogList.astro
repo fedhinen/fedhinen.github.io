@@ -35,7 +35,7 @@ const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDa
                         {post.data.tags && (
                             <div class="flex gap-2">
                                 {post.data.tags.map((tag) => (
-                                    <span class="text-primary">#{tag}</span>
+                                    <a href={`/${lang === 'es' ? 'blog' : 'en/blog'}/tag/${tag}`} class="text-primary hover:underline">#{tag}</a>
                                 ))}
                             </div>
                         )}

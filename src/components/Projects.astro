@@ -28,37 +28,26 @@ const sortedProjects = projects.sort((a, b) => b.data.date.valueOf() - a.data.da
     ) : (
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             {sortedProjects.map((project) => (
-                <article class="p-6 bg-bg-card rounded-lg border border-gray-800 hover:border-primary transition-colors group">
+                <article class="p-6 bg-bg-card rounded-lg border border-gray-200 hover:border-primary transition-all hover:shadow-lg group">
                     <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
-                        {project.data.link ? (
-                            <a href={project.data.link} target="_blank" rel="noopener noreferrer" class="no-underline hover:underline">
-                                {project.data.title}
-                            </a>
-                        ) : (
-                            project.data.title
-                        )}
+                        <a href={`/${lang === 'es' ? 'projects' : 'en/projects'}/${project.slug}`} class="no-underline">
+                            {project.data.title}
+                        </a>
                     </h3>
-                    <p class="text-gray-400 mb-4 text-sm leading-relaxed">
+                    <p class="text-gray-600 mb-4 text-sm leading-relaxed">
                         {project.data.description}
                     </p>
                     <div class="flex flex-wrap gap-2 mb-4">
                         {project.data.tags.map((tag) => (
-                            <span class="px-2 py-1 text-xs bg-gray-800 text-gray-300 rounded">
+                            <span class="px-2 py-1 text-xs bg-gray-100 text-gray-600 rounded border border-gray-200">
                                 {tag}
                             </span>
                         ))}
                     </div>
                     <div class="flex gap-4 text-sm">
-                        {project.data.repo && (
-                            <a href={project.data.repo} target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 text-gray-400 hover:text-white">
-                                <span>GitHub</span>
-                            </a>
-                        )}
-                        {project.data.link && (
-                            <a href={project.data.link} target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 text-gray-400 hover:text-white">
-                                <span>Demo</span>
-                            </a>
-                        )}
+                        <a href={`/${lang === 'es' ? 'projects' : 'en/projects'}/${project.slug}`} class="flex items-center gap-1 text-primary font-medium hover:underline">
+                            <span>{lang === 'es' ? 'Ver detalles' : 'View details'} &rarr;</span>
+                        </a>
                     </div>
                 </article>
             ))}

@@ -1,6 +1,8 @@
 ---
 import '../styles/global.css';
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import Background3D from '../components/Background3D.astro';
+import { ClientRouter } from 'astro:transitions';
 
 interface Props {
 	title: string;
@@ -24,26 +26,28 @@ const blogLink = lang === 'es' ? '/blog' : '/en/blog';
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+        <ClientRouter />
 	</head>
-	<body class="bg-bg text-text min-h-screen flex flex-col selection:bg-primary selection:text-bg">
-        <header class="py-6 px-4 md:px-8 max-w-4xl mx-auto w-full flex justify-between items-center">
-            <a href={homeLink} class="text-xl font-bold text-primary no-underline hover:text-white transition-colors">
+	<body class="bg-bg text-text min-h-screen flex flex-col selection:bg-primary selection:text-white relative overflow-x-hidden">
+        <Background3D />
+        <header class="py-6 px-4 md:px-8 max-w-4xl mx-auto w-full flex justify-between items-center z-10">
+            <a href={homeLink} class="text-xl font-bold text-primary no-underline hover:text-text transition-colors">
                 VR
             </a>
             <nav class="flex gap-4 text-sm md:text-base items-center">
                 <a href={`${homeLink}#experience`} class="hover:text-primary transition-colors">{t('nav.experience')}</a>
                 <a href={`${homeLink}#projects`} class="hover:text-primary transition-colors">{t('nav.projects')}</a>
                 <a href={blogLink} class="hover:text-primary transition-colors">{t('nav.blog')}</a>
-                <div class="flex gap-2 ml-4 border-l border-gray-700 pl-4">
-                    <a href="/" class={`text-xs font-bold ${lang === 'es' ? 'text-primary' : 'text-gray-500 hover:text-gray-300'}`}>ES</a>
-                    <a href="/en" class={`text-xs font-bold ${lang === 'en' ? 'text-primary' : 'text-gray-500 hover:text-gray-300'}`}>EN</a>
+                <div class="flex gap-2 ml-4 border-l border-gray-300 pl-4">
+                    <a href="/" class={`text-xs font-bold ${lang === 'es' ? 'text-primary' : 'text-gray-400 hover:text-gray-600'}`}>ES</a>
+                    <a href="/en" class={`text-xs font-bold ${lang === 'en' ? 'text-primary' : 'text-gray-400 hover:text-gray-600'}`}>EN</a>
                 </div>
             </nav>
         </header>
-		<main class="flex-1 w-full max-w-4xl mx-auto px-4 md:px-8 py-8">
+		<main class="flex-1 w-full max-w-4xl mx-auto px-4 md:px-8 py-8 z-10">
 			<slot />
 		</main>
-        <footer class="py-8 text-center text-sm text-gray-500">
+        <footer class="py-8 text-center text-sm text-gray-500 z-10">
             &copy; {new Date().getFullYear()} Victor Ruiz. {t('footer.rights')}
         </footer>
 	</body>
