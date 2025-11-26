@@ -1,0 +1,46 @@
+---
+import { useTranslations } from '../i18n/utils';
+
+interface Props {
+    lang: 'es' | 'en';
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const education = [
+    {
+        school: "Universidad Tecnológica de Torreón",
+        degree: { es: "TSU en Mecatrónica, Área Automatización", en: "TSU in Mechatronics, Automation Area" },
+        date: { es: "Esperado 2028", en: "Expected 2028" },
+        location: { es: "Torreón, México", en: "Torreón, Mexico" }
+    },
+    {
+        school: "Colegio Nacional de Educación Profesional Técnica",
+        degree: { es: "Técnico Bachiller en Química Industrial", en: "Technical Bachelor in Industrial Chemistry" },
+        date: "2016 - 2019",
+        location: { es: "Torreón, México", en: "Torreón, Mexico" }
+    }
+];
+---
+
+<section id="education" class="py-12 border-t border-gray-800">
+    <h2 class="text-2xl font-bold mb-8 flex items-center gap-2">
+        <span class="text-primary">#</span> {t('section.education')}
+    </h2>
+    
+    <div class="space-y-8">
+        {education.map((edu) => (
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start">
+                <div>
+                    <h3 class="text-lg font-bold text-white">{edu.school}</h3>
+                    <div class="text-primary">{edu.degree[lang]}</div>
+                    <div class="text-sm text-gray-500 mt-1">{edu.location[lang]}</div>
+                </div>
+                <div class="text-sm text-gray-500 font-mono mt-2 sm:mt-0">
+                    {typeof edu.date === 'string' ? edu.date : edu.date[lang]}
+                </div>
+            </div>
+        ))}
+    </div>
+</section>

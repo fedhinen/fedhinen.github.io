@@ -1,0 +1,23 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --color-primary: #90BFF9;
+  --color-bg: #121214;
+  --color-text: #F8F9FA;
+  --color-bg-card: #1c1c1f;
+}
+
+@layer base {
+  body {
+    @apply bg-bg text-text font-sans antialiased;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold text-text;
+  }
+
+  a {
+    @apply text-primary hover:underline decoration-primary/50 underline-offset-4 transition-all;
+  }
+}

@@ -1,0 +1,58 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { useTranslations } from '../i18n/utils';
+
+interface Props {
+    lang: 'es' | 'en';
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const posts = await getCollection('blog', ({ data }) => {
+    return data.lang === lang;
+});
+
+const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<Layout title={`Blog - Victor Ruiz`}>
+    <section class="py-12">
+        <h1 class="text-4xl font-bold mb-8">{t('nav.blog')}</h1>
+        
+        <div class="grid gap-8">
+            {sortedPosts.map((post) => (
+                <article class="flex flex-col gap-2 border-b border-gray-800 pb-8">
+                    <div class="flex items-center gap-4 text-sm text-gray-500 mb-1">
+                        <time datetime={post.data.pubDate.toISOString()}>
+                            {post.data.pubDate.toLocaleDateString(lang, {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric',
+                            })}
+                        </time>
+                        {post.data.tags && (
+                            <div class="flex gap-2">
+                                {post.data.tags.map((tag) => (
+                                    <span class="text-primary">#{tag}</span>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                    <h2 class="text-2xl font-bold hover:text-primary transition-colors">
+                        <a href={`/${lang === 'es' ? 'blog' : 'en/blog'}/${post.slug}`} class="no-underline">
+                            {post.data.title}
+                        </a>
+                    </h2>
+                    <p class="text-gray-400 leading-relaxed">
+                        {post.data.description}
+                    </p>
+                    <a href={`/${lang === 'es' ? 'blog' : 'en/blog'}/${post.slug}`} class="text-sm font-bold mt-2 inline-flex items-center gap-1 hover:gap-2 transition-all">
+                        {t('blog.readMore')} &rarr;
+                    </a>
+                </article>
+            ))}
+        </div>
+    </section>
+</Layout>

@@ -1,0 +1,71 @@
+---
+import { useTranslations } from '../i18n/utils';
+
+interface Props {
+    lang: 'es' | 'en';
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const experience = [
+    {
+        company: "MecanicaMX",
+        role: { es: "Ingeniero de Software", en: "Software Engineer" },
+        date: { es: "Jun. 2024 -- Presente", en: "Jun. 2024 -- Present" },
+        description: {
+            es: [
+                "Desarrollé funciones clave de facturación integrando una API externa para facturación global (CFDI 4.0).",
+                "Implementé un sistema de notificaciones escalable usando Cloudflare Queues para WhatsApp y correos.",
+                "Desarrollé un bot de soporte automatizado con n8n.",
+                "Diseñé y construí un sistema de generación de PDF personalizado."
+            ],
+            en: [
+                "Engineered key billing features by integrating an external API for global invoicing (CFDI 4.0).",
+                "Implemented a scalable notification system using Cloudflare Queues for WhatsApp and emails.",
+                "Developed an automated support bot with n8n.",
+                "Designed and built a custom PDF generation system."
+            ]
+        }
+    },
+    {
+        company: "SW Argos",
+        role: { es: "Desarrollador FullStack", en: "FullStack Developer" },
+        date: { es: "Ene. 2023 -- Jun. 2024", en: "Jan. 2023 -- Jun. 2024" },
+        description: {
+            es: [
+                "Lideré la migración completa de una aplicación de escritorio heredada a una plataforma web moderna usando Spring Boot y React.",
+                "Diseñé e implementé un pipeline CI/CD completo usando GitHub Actions."
+            ],
+            en: [
+                "Spearheaded the complete migration of a legacy desktop application to a modern web platform using Spring Boot and React.",
+                "Designed and implemented a full CI/CD pipeline using GitHub Actions."
+            ]
+        }
+    }
+];
+---
+
+<section id="experience" class="py-12 border-t border-gray-800">
+    <h2 class="text-2xl font-bold mb-8 flex items-center gap-2">
+        <span class="text-primary">#</span> {t('section.experience')}
+    </h2>
+    
+    <div class="space-y-12">
+        {experience.map((job) => (
+            <div class="relative pl-8 border-l border-gray-800">
+                <div class="absolute -left-1.5 top-1.5 w-3 h-3 rounded-full bg-primary"></div>
+                <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-2">
+                    <h3 class="text-xl font-bold text-white">{job.company}</h3>
+                    <span class="text-sm text-gray-500 font-mono">{job.date[lang]}</span>
+                </div>
+                <div class="text-primary mb-4 font-medium">{job.role[lang]}</div>
+                <ul class="list-disc list-outside ml-4 space-y-2 text-gray-400">
+                    {job.description[lang].map((item) => (
+                        <li>{item}</li>
+                    ))}
+                </ul>
+            </div>
+        ))}
+    </div>
+</section>

@@ -1,0 +1,53 @@
+export const languages = {
+  es: 'Español',
+  en: 'English',
+};
+
+export const defaultLang = 'es';
+
+export const ui = {
+  es: {
+    'nav.home': 'Inicio',
+    'nav.about': 'Sobre mí',
+    'nav.experience': 'Experiencia',
+    'nav.projects': 'Proyectos',
+    'nav.education': 'Educación',
+    'nav.blog': 'Blog',
+    'hero.greeting': 'Hola, soy Victor Ruiz',
+    'hero.role': 'Ingeniero de Software',
+    'hero.description': 'Ingeniero de Software altamente motivado con experiencia demostrada en el diseño, desarrollo y despliegue de aplicaciones web robustas.',
+    'section.experience': 'Experiencia Laboral',
+    'section.projects': 'Proyectos',
+    'section.education': 'Educación',
+    'section.skills': 'Habilidades',
+    'projects.empty': 'En construcción',
+    'footer.rights': 'Todos los derechos reservados.',
+    'hobbies.title': 'Aficiones',
+    'hobbies.chess': 'Ajedrez',
+    'hobbies.drawing': 'Dibujo',
+    'hobbies.math': 'Matemáticas',
+    'blog.readMore': 'Leer más',
+  },
+  en: {
+    'nav.home': 'Home',
+    'nav.about': 'About',
+    'nav.experience': 'Experience',
+    'nav.projects': 'Projects',
+    'nav.education': 'Education',
+    'nav.blog': 'Blog',
+    'hero.greeting': 'Hi, I\'m Victor Ruiz',
+    'hero.role': 'Software Engineer',
+    'hero.description': 'Highly motivated Software Engineer with demonstrated experience in designing, developing, and deploying robust web applications.',
+    'section.experience': 'Work Experience',
+    'section.projects': 'Projects',
+    'section.education': 'Education',
+    'section.skills': 'Skills',
+    'projects.empty': 'Under Construction',
+    'footer.rights': 'All rights reserved.',
+    'hobbies.title': 'Hobbies',
+    'hobbies.chess': 'Chess',
+    'hobbies.drawing': 'Drawing',
+    'hobbies.math': 'Mathematics',
+    'blog.readMore': 'Read more',
+  },
+} as const;
