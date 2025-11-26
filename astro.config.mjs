@@ -3,8 +3,11 @@ import { defineConfig } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
 
+import sitemap from '@astrojs/sitemap';
+
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://fedhinen.github.io',
   i18n: {
     defaultLocale: 'es',
     locales: ['es', 'en'],
@@ -12,7 +15,10 @@ export default defineConfig({
       prefixDefaultLocale: false
     }
   },
+
   vite: {
     plugins: [tailwindcss()]
-  }
+  },
+
+  integrations: [sitemap()]
 });
