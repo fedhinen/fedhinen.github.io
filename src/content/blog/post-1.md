@@ -1,11 +1,9 @@
 ---
-title: "Mi primer post"
-description: "Bienvenido a mi nuevo blog construido con Astro."
-pubDate: 2024-11-26
-tags: ["astro", "blog"]
+title: "Hack The Box: Conversor"
+description: "WriteUp de maquina Conversor"
+pubDate: 2025-11-29
+tags: ["pentesting"]
 lang: "es"
 ---
 
-# Hola Mundo
-
-Este es mi primer post en el blog. Estoy usando Astro para construir este sitio.
+## Proximamente
