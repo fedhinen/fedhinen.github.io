@@ -1,34 +1,64 @@
 ---
-title: "MedIndex: API de Información Médica"
-description: "Plataforma integral y API RESTful para la consulta de medicamentos y sustancias farmacéuticas"
-tags: ["Java", "Spring Boot", "Python", "Astro", "Svelte", "PostgreSQL", "ETL"]
-date: 2026-01-21
+title: "MedIndex: Plataforma de Información Médica"
+description: "API completa sobre medicamentos con web scraping automatizado y documentación interactiva"
+tags: ["Spring Boot", "Java", "Python", "PostgreSQL", "Astro", "ETL", "Web Scraping"]
+date: 2026-01-15
 lang: "es"
-repo: "https://github.com/fedhinen/medindex-api"
+docs: "https://medindex.fedhinen.me"
 ---
 
-**MedIndex** es una solución completa para centralizar y exponer información farmacéutica detallada. Combina un potente proceso de extracción de datos (ETL) con una API robusta y una interfaz moderna de consulta.
+**MedIndex** es una API pública y gratuita que proporciona información estructurada sobre medicamentos. Nació de la necesidad de tener una API confiable para consultar datos farmacéuticos de forma programática.
 
 ## 💡 El Problema
-La información sobre medicamentos, sus composiciones e interacciones suele estar dispersa en diversas fuentes o bloqueada en formatos difíciles de procesar automáticamente. Los desarrolladores y profesionales de la salud carecen de una API unificada y confiable para consultar estos datos de manera programática.
+
+No encontre una API pública que proporcione información completa sobre medicamentos y sobre todo que me agrade, la solución, crear una propia
 
 ## 🛠️ Solución Técnica
-El sistema se compone de tres pilares fundamentales que garantizan la integridad y disponibilidad de los datos:
 
-1.  **Pipeline ETL (Python)**: Un sistema automatizado que extrae, limpia y normaliza datos de fuentes públicas (como PLM), procesando detalles complejos como dosis, contraindicaciones y composiciones.
-2.  **API Backend (Spring Boot)**: Una arquitectura segura y escalable que expone los datos normalizados, gestionando la autenticación y las búsquedas complejas.
-3.  **Frontend (Astro + Svelte)**: Una interfaz de usuario rápida y reactiva para la exploración manual del catálogo.
+Una API REST completamente documentada que cualquiera puede usar:
 
-### Características Clave:
-- **Base de Datos Unificada**: Información estructurada de miles de medicamentos y sustancias activas.
-- **Búsqueda Avanzada**: Filtrado por nombre, sustancia activa o laboratorio.
-- **Seguridad**: Implementación de OAuth2 y JWT para proteger los endpoints de la API.
-- **Alto Rendimiento**: Optimizaciones en base de datos y caché para respuestas rápidas.
+1. **Extracción de Datos (Python)**: Una serie de scripts para obtener la información desde PLM, de momento no es automatica
+
+2. **API REST (Spring Boot)**: Endpoints documentados con OpenAPI/Swagger para consultar medicamentos, sustancias activas, laboratorios y presentaciones. Incluye autenticación JWT para proteger el servicio.
+
+3. **Base de Datos (PostgreSQL)**: Más de 10,000 medicamentos con información detallada sobre composición, indicaciones, contraindicaciones, dosis y más.
+
+4. **Documentación (Astro + Starlight)**: Sitio con ejemplos de uso y guías de integración para facilitar la adopción de la API.
+
+### Características Clave
+
+- **API Pública**: Acceso gratuito a información estructurada de medicamentos.
+- **Datos Completos**: Más de 10,000 medicamentos con composición, indicaciones, contraindicaciones, dosis y efectos secundarios.
+- **Documentación Interactiva**: Swagger UI integrado para probar los endpoints sin escribir código.
+- **Búsqueda Flexible**: Consultar por nombre de medicamento, sustancia activa o laboratorio.
+- **Fácil Integración**: Respuestas JSON estándar y autenticación simple con API keys.
 
 ## 🔧 Stack Tecnológico
-- **Backend**: Java 25, Spring Boot 4.0, Spring Security, JPA/Hibernate.
-- **Frontend**: Astro, Svelte, TailwindCSS.
-- **Data & ETL**: Python (lxml, requests), PostgreSQL.
-- **Infraestructura**: Docker, Docker Compose.
 
-Este proyecto demuestra la capacidad de integrar múltiples lenguajes y arquitecturas (Microservicios, ETL, SPA) para resolver un problema de gestión de datos a gran escala.
+- **Spring Boot 4.0 & Java 25**: Framework empresarial moderno con JPA/Hibernate para persistencia.
+- **Python**: Scripts ETL con scrapling, lxml y requests para web scraping robusto.
+- **PostgreSQL 16**: Base de datos relacional con índices optimizados para rendimiento.
+- **Astro + Starlight**: Framework estático para documentación técnica moderna.
+- **Docker & Docker Compose**: Orquestación de servicios y despliegue simplificado.
+- **SpringDoc OpenAPI**: Generación automática de documentación de API.
+- **JWT & Spring Security**: Sistema de autenticación y autorización seguro.
+
+## 📊 Arquitectura de Datos
+
+La base de datos incluye las siguientes entidades principales:
+
+- **Medicamentos**: Información básica y relaciones con laboratorios y formas farmacéuticas
+- **Sustancias**: Principios activos con sus URLs de referencia
+- **Presentaciones**: Detalles de dosis, cantidades y unidades
+- **Detalles de Medicamentos**: Rubros completos (composición, indicaciones, contraindicaciones, etc.)
+- **Laboratorios**: Fabricantes farmacéuticos
+- **Formas Farmacéuticas**: Tipos de presentación (tabletas, soluciones, etc.)
+
+## 🚀 Próximos Pasos
+
+- **Actualizaciones Automáticas**: Automatizar el proceso de scraping para mantener la base de datos sincronizada con las fuentes oficiales periódicamente.
+- **Rate Limiting**: Implementar límites de uso justos para mantener el servicio estable y prevenir abusos.
+- **Búsqueda por Texto Completo**: Permitir búsquedas más inteligentes en descripciones e indicaciones.
+- **Sponsors**: Abrir la posibilidad de sponsors para mantener y escalar el servicio gratuitamente.
+- **Más Datos**: Expandir la cobertura a otros mercados farmacéuticos latinoamericanos.
+- **Repositorio Público**: Abrir el código fuente para contribuciones de la comunidad.
