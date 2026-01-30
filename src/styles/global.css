@@ -13,6 +13,94 @@
   --font-handwriting: "Caveat", cursive;
 }
 
+@layer components {
+  .badge-object {
+    @apply uppercase tracking-widest text-[10px] font-bold px-2 py-1 rounded bg-gray-100 text-gray-500 border border-gray-200 inline-block mb-4;
+  }
+
+  .property-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-4 my-8 p-6 bg-white rounded-2xl border border-gray-100 shadow-sm;
+  }
+  
+  .property-item {
+    @apply flex flex-col gap-1;
+  }
+  
+  .property-label {
+    @apply text-xs font-bold text-gray-400 uppercase tracking-wider flex items-center gap-2;
+  }
+  
+  .property-value {
+    @apply text-sm font-medium text-gray-800 flex flex-wrap gap-2 items-center;
+  }
+
+  .callout {
+    @apply p-6 my-8 rounded-2xl border border-l-4 bg-gray-50/50 text-base leading-relaxed;
+  }
+  
+  .callout-info {
+    @apply border-blue-200 bg-blue-50/30 text-blue-900 border-l-blue-500;
+  }
+  
+  .callout-warning {
+    @apply border-amber-200 bg-amber-50/30 text-amber-900 border-l-amber-500;
+  }
+
+  .backlink-card {
+    @apply p-4 rounded-xl border border-dashed border-gray-300 hover:border-primary/30 hover:bg-gray-50 transition-all cursor-pointer flex gap-4 items-center;
+  }
+}
+
+@layer base {
+  .prose {
+    @apply max-w-none text-gray-700;
+  }
+  
+  .prose h1, .prose h2, .prose h3 {
+    @apply text-primary font-bold tracking-tight mt-12 mb-6;
+  }
+
+  .prose h2 {
+    @apply text-2xl border-b border-gray-100 pb-2;
+  }
+
+  .prose p {
+    @apply leading-relaxed mb-6 text-lg;
+  }
+  
+  .prose code {
+     @apply font-mono text-sm bg-gray-100 px-1.5 py-0.5 rounded text-pink-600 font-medium;
+  }
+  
+  .prose pre {
+    @apply rounded-2xl bg-gray-900 text-gray-100 p-6 my-8 shadow-2xl;
+  }
+
+  .prose pre code {
+    @apply bg-transparent text-inherit p-0 text-sm;
+  }
+
+  .prose blockquote {
+    @apply not-italic border-l-4 border-gray-200 pl-6 my-8 text-gray-500 font-normal py-2;
+  }
+
+  .prose ul {
+    @apply list-disc list-outside ml-6 space-y-2 mb-6 marker:text-gray-300;
+  }
+  
+  .prose ol {
+    @apply list-decimal list-outside ml-6 space-y-2 mb-6 marker:text-gray-400;
+  }
+
+  .prose img {
+    @apply rounded-2xl shadow-lg my-8 w-full border border-gray-100;
+  }
+  
+  .prose a {
+     @apply font-medium decoration-1 underline-offset-2;
+  }
+}
+
 @layer base {
   body {
     @apply bg-bg text-text font-sans antialiased font-light;

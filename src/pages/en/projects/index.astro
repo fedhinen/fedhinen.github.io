@@ -1,0 +1,19 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Projects from '../../../components/Projects.astro';
+import { useTranslations } from '../../../i18n/utils';
+
+const t = useTranslations('en');
+---
+
+<Layout title={`Victor Ruiz - ${t('nav.projects')}`}>
+    <div class="max-w-5xl mx-auto px-4 md:px-8 mt-12 mb-24">
+        <header class="mb-16">
+             <span class="badge-object mb-4 inline-block">{t('project.object')}</span>
+             <h1 class="text-5xl font-[800] tracking-tight text-primary mb-4">{t('nav.projects')}</h1>
+             <p class="text-gray-500 text-lg max-w-2xl">{t('projects.gallery.description')}</p>
+        </header>
+        
+        <Projects lang="en" />
+    </div>
+</Layout>
