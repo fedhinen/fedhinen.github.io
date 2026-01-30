@@ -10,7 +10,7 @@ interface Props {
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-const { title, description = "Victor Ruiz - Software Engineer Portfolio" } = Astro.props;
+const { title, description = "Victor Ruiz - Fullstack Developer Portfolio" } = Astro.props;
 
 const homeLink = lang === 'es' ? '/' : '/en';
 const blogLink = lang === 'es' ? '/blog' : '/en/blog';
