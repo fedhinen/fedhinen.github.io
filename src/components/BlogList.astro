@@ -19,12 +19,12 @@ const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDa
 
 <Layout title={`Blog - Victor Ruiz`}>
     <section class="py-12">
-        <h1 class="text-4xl font-bold mb-8">{t('nav.blog')}</h1>
+        <h1 class="text-4xl font-bold mb-8 text-primary tracking-tight">{t('nav.blog')}</h1>
         
         <div class="grid gap-8">
             {sortedPosts.map((post) => (
-                <article class="flex flex-col gap-2 border-b border-gray-800 pb-8">
-                    <div class="flex items-center gap-4 text-sm text-gray-500 mb-1">
+                <article class="card-soft p-8 hover:border-black/10 transition-colors group">
+                    <div class="flex items-center gap-4 text-xs font-medium text-gray-400 mb-3 uppercase tracking-wider">
                         <time datetime={post.data.pubDate.toISOString()}>
                             {post.data.pubDate.toLocaleDateString(lang, {
                                 year: 'numeric',
@@ -33,23 +33,26 @@ const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDa
                             })}
                         </time>
                         {post.data.tags && (
-                            <div class="flex gap-2">
-                                {post.data.tags.map((tag) => (
-                                    <a href={`/${lang === 'es' ? 'blog' : 'en/blog'}/tag/${tag}`} class="text-primary hover:underline">#{tag}</a>
-                                ))}
-                            </div>
+                             <>
+                                <span>•</span>
+                                <div class="flex gap-2">
+                                    {post.data.tags.map((tag) => (
+                                        <a href={`/${lang === 'es' ? 'blog' : 'en/blog'}/tag/${tag}`} class="hover:text-primary transition-colors">#{tag}</a>
+                                    ))}
+                                </div>
+                            </>
                         )}
                     </div>
-                    <h2 class="text-2xl font-bold hover:text-primary transition-colors">
-                        <a href={`/${lang === 'es' ? 'blog' : 'en/blog'}/${post.slug}`} class="no-underline">
+                    <h2 class="text-2xl font-bold text-primary mb-3">
+                        <a href={`/${lang === 'es' ? 'blog' : 'en/blog'}/${post.slug}`} class="no-underline hover:text-black">
                             {post.data.title}
                         </a>
                     </h2>
-                    <p class="text-gray-400 leading-relaxed">
+                    <p class="text-text-muted leading-relaxed mb-6">
                         {post.data.description}
                     </p>
-                    <a href={`/${lang === 'es' ? 'blog' : 'en/blog'}/${post.slug}`} class="text-sm font-bold mt-2 inline-flex items-center gap-1 hover:gap-2 transition-all">
-                        {t('blog.readMore')} &rarr;
+                    <a href={`/${lang === 'es' ? 'blog' : 'en/blog'}/${post.slug}`} class="btn-pill inline-flex items-center gap-2 group-hover:bg-primary group-hover:text-white group-hover:border-primary">
+                        {t('blog.readMore')} <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
                     </a>
                 </article>
             ))}

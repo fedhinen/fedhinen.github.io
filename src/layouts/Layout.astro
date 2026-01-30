@@ -1,7 +1,6 @@
 ---
 import '../styles/global.css';
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
-import Background3D from '../components/Background3D.astro';
 import { ClientRouter } from 'astro:transitions';
 
 interface Props {
@@ -27,27 +26,32 @@ const blogLink = lang === 'es' ? '/blog' : '/en/blog';
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
         <ClientRouter />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
 	</head>
-	<body class="bg-bg text-text min-h-screen flex flex-col selection:bg-primary selection:text-white relative overflow-x-hidden">
-        <Background3D />
-        <header class="py-6 px-4 md:px-8 max-w-4xl mx-auto w-full flex justify-between items-center z-10">
-            <a href={homeLink} class="text-xl font-bold text-primary no-underline hover:text-text transition-colors">
+	<body class="bg-bg text-text min-h-screen flex flex-col selection:bg-black selection:text-white relative overflow-x-hidden font-['Inter',sans-serif]">
+        <!-- Background Grid Pattern -->
+        <div class="fixed inset-0 z-0 pointer-events-none opacity-[0.03]" style="background-image: radial-gradient(#000 1px, transparent 1px); background-size: 24px 24px;"></div>
+
+        <header class="py-6 px-4 md:px-8 max-w-5xl mx-auto w-full flex justify-between items-center z-10">
+            <a href={homeLink} class="text-xl font-bold text-primary no-underline hover:opacity-70 transition-opacity tracking-tighter">
                 VR
             </a>
-            <nav class="flex gap-4 text-sm md:text-base items-center">
-                <a href={`${homeLink}#experience`} class="hover:text-primary transition-colors">{t('nav.experience')}</a>
-                <a href={`${homeLink}#projects`} class="hover:text-primary transition-colors">{t('nav.projects')}</a>
-                <a href={blogLink} class="hover:text-primary transition-colors">{t('nav.blog')}</a>
-                <div class="flex gap-2 ml-4 border-l border-gray-300 pl-4">
-                    <a href="/" class={`text-xs font-bold ${lang === 'es' ? 'text-primary' : 'text-gray-400 hover:text-gray-600'}`}>ES</a>
-                    <a href="/en" class={`text-xs font-bold ${lang === 'en' ? 'text-primary' : 'text-gray-400 hover:text-gray-600'}`}>EN</a>
+            <nav class="flex gap-1 md:gap-4 text-sm md:text-sm font-medium items-center bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full border border-black/5 shadow-sm">
+                <a href={`${homeLink}#experience`} class="hover:text-black hover:bg-gray-100 px-3 py-1.5 rounded-full transition-all">{t('nav.experience')}</a>
+                <a href={`${homeLink}#projects`} class="hover:text-black hover:bg-gray-100 px-3 py-1.5 rounded-full transition-all">{t('nav.projects')}</a>
+                <a href={blogLink} class="hover:text-black hover:bg-gray-100 px-3 py-1.5 rounded-full transition-all">{t('nav.blog')}</a>
+                <div class="flex gap-2 ml-2 border-l border-gray-200 pl-2">
+                    <a href="/" class={`text-xs font-bold px-2 py-1 rounded transition-colors ${lang === 'es' ? 'bg-black text-white' : 'text-gray-400 hover:text-gray-600'}`}>ES</a>
+                    <a href="/en" class={`text-xs font-bold px-2 py-1 rounded transition-colors ${lang === 'en' ? 'bg-black text-white' : 'text-gray-400 hover:text-gray-600'}`}>EN</a>
                 </div>
             </nav>
         </header>
-		<main class="flex-1 w-full max-w-4xl mx-auto px-4 md:px-8 py-8 z-10">
+		<main class="flex-1 w-full max-w-5xl mx-auto px-4 md:px-8 py-8 z-10 flex flex-col gap-12">
 			<slot />
 		</main>
-        <footer class="py-8 text-center text-sm text-gray-500 z-10">
+        <footer class="py-12 mt-12 text-center text-sm text-gray-400 z-10 border-t border-gray-100">
             &copy; {new Date().getFullYear()} Victor Ruiz. {t('footer.rights')}
         </footer>
 	</body>

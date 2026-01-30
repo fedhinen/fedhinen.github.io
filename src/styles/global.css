@@ -2,25 +2,53 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  --color-primary: #2563EB; /* A darker blue for better contrast on light bg */
-  --color-bg: #F8F9FA;
-  --color-text: #121214;
+  --color-primary: #111827; /* Dark gray almost black for headings as requested */
+  --color-accent: #6b7280; /* Neutral gray for accents */
+  --color-bg: #FAFAFA; /* Off-white background */
+  --color-text: #1F2937; /* Very dark gray for text, not pure black */
+  --color-text-muted: #6B7280; /* Medium gray */
   --color-bg-card: #FFFFFF;
-  --color-border: #E5E7EB;
+  --color-border: #F3F4F6;
+  
+  --font-handwriting: "Caveat", cursive;
 }
 
 @layer base {
   body {
     @apply bg-bg text-text font-sans antialiased font-light;
-    background-image: radial-gradient(circle at 50% 0%, rgba(144, 191, 249, 0.1) 0%, transparent 50%);
+    /* Clean background, no noise or gradients by default unless specific to a section */
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-semibold text-text tracking-tight;
+    @apply font-bold text-primary tracking-tight;
   }
 
   a {
-    @apply text-primary hover:underline decoration-primary/50 underline-offset-4 transition-all;
+    @apply text-primary hover:text-black transition-all;
+  }
+}
+
+@layer components {
+  .card-soft {
+    @apply bg-white rounded-3xl border border-black/5 shadow-xl shadow-black/5;
+    /* Soft, diffuse shadow, rounded corners (24px ~ rounded-3xl) */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .card-soft:hover {
+     @apply transform -translate-y-1 shadow-2xl shadow-black/10;
+  }
+
+  .btn-pill {
+    @apply px-6 py-2 rounded-full font-medium transition-colors border border-black/10 hover:border-black/30 bg-white text-sm text-text whitespace-nowrap;
+  }
+
+  .btn-pill-primary {
+    @apply px-6 py-2 rounded-full font-medium transition-colors bg-primary text-white hover:bg-black text-sm whitespace-nowrap shadow-lg shadow-primary/20;
+  }
+
+  .tag-pill {
+    @apply px-3 py-1 rounded-full text-xs font-medium border border-transparent;
   }
 }
 
