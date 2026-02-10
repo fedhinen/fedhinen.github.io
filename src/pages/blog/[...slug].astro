@@ -25,11 +25,11 @@ const tagColors = [
 ---
 
 <Layout title={post.data.title} description={post.data.description}>
-    <div class="max-w-3xl mx-auto py-12">
+    <div class="max-w-3xl mx-auto py-8 md:py-12 overflow-x-auto">
          <!-- Meta Area -->
-        <header class="mb-16">
+        <header class="mb-8 md:mb-16">
             <span class="badge-object">{t('blog.object')}</span>
-            <h1 class="text-4xl md:text-5xl font-[800] tracking-tight text-primary mb-6 leading-tight">
+            <h1 class="text-3xl md:text-5xl font-[800] tracking-tight text-primary mb-6 leading-tight">
                 {post.data.title}
             </h1>
             
@@ -65,18 +65,18 @@ const tagColors = [
                 </div>
             </div>
             
-             <p class="text-xl text-gray-500 leading-relaxed max-w-2xl text-pretty border-l-4 border-gray-100 pl-4 italic">
+             <p class="text-base md:text-xl text-gray-500 leading-relaxed max-w-2xl text-pretty border-l-4 border-gray-100 pl-4 italic">
                 {post.data.description}
             </p>
         </header>
 
         <!-- Studio Canvas -->
-        <article class="prose prose-lg">
+        <article class="prose md:prose-lg w-full min-w-0">
             <Content />
         </article>
 
          <!-- Footer Graph -->
-         <footer class="mt-24 pt-12 border-t border-dashed border-gray-200">
+         <footer class="mt-12 md:mt-24 pt-8 md:pt-12 border-t border-dashed border-gray-200">
             <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-6">{t('object.related')}</h3>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <a href="/blog" class="backlink-card group">

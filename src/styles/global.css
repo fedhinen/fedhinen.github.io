@@ -53,7 +53,7 @@
 
 @layer base {
   .prose {
-    @apply max-w-none text-gray-700;
+    @apply max-w-none text-text break-words overflow-x-hidden;
   }
   
   .prose h1, .prose h2, .prose h3 {
@@ -73,7 +73,7 @@
   }
   
   .prose pre {
-    @apply rounded-2xl bg-gray-900 text-gray-100 p-6 my-8 shadow-2xl;
+    @apply rounded-2xl bg-gray-900 text-gray-100 p-6 my-8 shadow-2xl overflow-x-auto max-w-full;
   }
 
   .prose pre code {
@@ -93,7 +93,7 @@
   }
 
   .prose img {
-    @apply rounded-2xl shadow-lg my-8 w-full border border-gray-100;
+    @apply rounded-2xl shadow-lg my-8 w-full border border-gray-100 h-auto;
   }
   
   .prose a {

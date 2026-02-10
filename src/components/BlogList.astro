@@ -17,16 +17,16 @@ const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDa
 ---
 
 {sortedPosts.length === 0 ? (
-    <div class="p-12 border border-dashed border-gray-200 rounded-2xl text-center">
+    <div class="p-6 md:p-12 border border-dashed border-gray-200 rounded-2xl text-center">
         <div class="text-4xl mb-4">📝</div>
         <p class="text-gray-400 font-medium">{t('blog.empty')}</p>
     </div>
 ) : (
     <div class="grid gap-8">
         {sortedPosts.map((post) => (
-            <article class="card-soft p-8 hover:border-black/10 transition-colors group">
-                <div class="flex items-center gap-4 text-xs font-medium text-gray-400 mb-3 uppercase tracking-wider">
-                    <time datetime={post.data.pubDate.toISOString()}>
+            <article class="card-soft p-6 md:p-8 hover:border-black/10 transition-colors group">
+                <div class="flex flex-wrap items-center gap-2 md:gap-4 text-xs font-medium text-gray-400 mb-3 uppercase tracking-wider">
+                    <time datetime={post.data.pubDate.toISOString()} class="whitespace-nowrap">
                         {post.data.pubDate.toLocaleDateString(lang, {
                             year: 'numeric',
                             month: 'long',
