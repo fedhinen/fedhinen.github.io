@@ -27,4 +27,16 @@ const projects = defineCollection({
     })
 });
 
-export const collections = { blog, projects };
+const certifications = defineCollection({
+    type: 'data',
+    schema: z.object({
+        name: z.string(),
+        issuer: z.string(),
+        image: z.string(),
+        url: z.string().url().optional(),
+        date: z.coerce.date(),
+        featured: z.boolean().default(true),
+    })
+});
+
+export const collections = { blog, projects, certifications };

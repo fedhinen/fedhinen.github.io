@@ -10,9 +10,32 @@ const t = useTranslations(lang);
 
 const experience = [
     {
+        id: "xaldigital",
+        company: "Xaldigital",
+        role: { es: "Operations Consultant", en: "Operations Consultant" },
+        date: { es: "Abr. 2026 — Presente", en: "Apr. 2026 — Present" },
+        current: true,
+        description: {
+            es: [
+                "Trabajo con múltiples clientes que operan sus plataformas en AWS.",
+                "Brindo soporte operativo y acompañamiento técnico continuo.",
+                "Ejecuto migraciones de cargas de trabajo hacia la nube.",
+                "Optimización y control de costos en la nube (FinOps)."
+            ],
+            en: [
+                "Work with multiple clients running their platforms on AWS.",
+                "Provide ongoing operational support and technical guidance.",
+                "Execute cloud workload migrations.",
+                "Cloud cost optimization and governance (FinOps)."
+            ]
+        }
+    },
+    {
+        id: "mecanicamx",
         company: "MecanicaMX",
         role: { es: "Desarrollador Fullstack", en: "Fullstack Developer" },
-        date: { es: "Jun. 2024 -- Ene. 2026", en: "Jun. 2024 -- Jan. 2026" },
+        date: { es: "Jun. 2024 — Ene. 2026", en: "Jun. 2024 — Jan. 2026" },
+        current: false,
         description: {
             es: [
                 "Desarrollé funciones clave de facturación integrando una API externa para facturación global (CFDI 4.0).",
@@ -29,9 +52,11 @@ const experience = [
         }
     },
     {
+        id: "sw-argos",
         company: "SW Argos",
         role: { es: "Desarrollador FullStack", en: "FullStack Developer" },
-        date: { es: "Ene. 2023 -- Jun. 2024", en: "Jan. 2023 -- Jun. 2024" },
+        date: { es: "Ene. 2023 — Jun. 2024", en: "Jan. 2023 — Jun. 2024" },
+        current: false,
         description: {
             es: [
                 "Lideré la migración completa de una aplicación de escritorio heredada a una plataforma web moderna usando Spring Boot y React.",
@@ -46,50 +71,118 @@ const experience = [
 ];
 ---
 
-<section id="experience" class="py-8 md:py-12">
-    <div class="flex items-center gap-3 mb-10">
-        <div class="h-px bg-gray-200 flex-1"></div>
-        <h2 class="text-2xl font-bold text-primary tracking-tight">
-             {t('nav.experience')}
-        </h2>
-        <div class="h-px bg-gray-200 flex-1"></div>
+<section id="experience" class="py-16 md:py-24 scroll-mt-24">
+    <div class="mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-primary tracking-tight">{t('nav.experience')}</h2>
+        <p class="text-text-muted mt-2">{t('experience.description')}</p>
     </div>
 
-    <div class="space-y-8 relative">
-        <!-- Timeline Line -->
-        <div class="absolute left-8 top-8 bottom-8 w-px bg-gray-200 hidden md:block"></div>
-
-        {experience.map((job) => (
-            <div class="relative pl-0 md:pl-20">
-                <!-- Timeline Dot -->
-                <div class="absolute left-8 top-8 w-2 h-2 rounded-full bg-black ring-4 ring-white hidden md:block -translate-x-1/2"></div>
-                
-                <article class="card-soft p-4 md:p-8 relative">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-2">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-lg shadow-sm border border-gray-100 text-gray-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><path d="M9 22v-4h6v4"></path><path d="M8 6h.01"></path><path d="M16 6h.01"></path><path d="M8 10h.01"></path><path d="M16 10h.01"></path><path d="M8 14h.01"></path><path d="M16 14h.01"></path></svg>
-                            </div>
-                            <div>
-                                <h3 class="text-lg font-bold text-primary">{job.company}</h3>
-                                <p class="text-sm font-medium text-text-muted">{job.role[lang]}</p>
-                            </div>
-                        </div>
-                        <span class="inline-block px-3 py-1 bg-gray-50 rounded-full text-xs font-semibold text-gray-500 border border-gray-100 whitespace-nowrap">
-                            {job.date[lang]}
-                        </span>
+    <div class="grid grid-cols-1 md:grid-cols-[1fr_14rem] md:gap-14" data-exp-root>
+        <!-- Contenido (izquierda) -->
+        <div class="order-2 md:order-1">
+            {experience.map((job) => (
+                <article
+                    id={`exp-${job.id}`}
+                    data-exp-panel={job.id}
+                    class="group py-16 md:py-20 border-t border-gray-200/70 first:border-t-0 scroll-mt-28"
+                >
+                    <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 mb-1">
+                        <h3 class="text-2xl font-bold text-primary tracking-tight flex items-center gap-3">
+                            {job.company}
+                            {job.current && (
+                                <span class="inline-flex items-center gap-1.5 text-[11px] font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                                    {lang === 'es' ? 'Actual' : 'Current'}
+                                </span>
+                            )}
+                        </h3>
+                        <span class="text-sm font-medium text-text-muted whitespace-nowrap">{job.date[lang]}</span>
                     </div>
+                    <p class="text-base font-medium text-text-muted mb-6">{job.role[lang]}</p>
 
-                    <ul class="space-y-3">
+                    <ul class="space-y-2.5 max-w-2xl">
                         {job.description[lang].map((item) => (
-                            <li class="flex items-start gap-3 text-sm text-text/80 leading-relaxed">
-                                <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-gray-300 shrink-0"></span>
+                            <li class="flex items-start gap-3 text-[15px] text-text/80 leading-relaxed">
+                                <span class="mt-2 w-1 h-1 rounded-full bg-gray-400 shrink-0"></span>
                                 <span>{item}</span>
                             </li>
                         ))}
                     </ul>
                 </article>
+            ))}
+        </div>
+
+        <!-- Menú sticky (derecha) -->
+        <aside class="order-1 md:order-2 mb-8 md:mb-0">
+            <div class="md:sticky md:top-28">
+                <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4 hidden md:block">
+                    {t('experience.menu.title')}
+                </p>
+                <nav class="flex md:flex-col gap-1 overflow-x-auto md:overflow-visible pb-2 md:pb-0 border-l border-gray-200/0 md:border-l" data-exp-menu>
+                    {experience.map((job) => (
+                        <a
+                            href={`#exp-${job.id}`}
+                            data-exp-link={job.id}
+                            class="exp-link relative md:-ml-px flex flex-col px-4 py-2 text-sm font-medium text-gray-400 hover:text-primary transition-colors whitespace-nowrap md:border-l-2 md:border-transparent rounded-md md:rounded-none"
+                        >
+                            <span>{job.company}</span>
+                            <span class="text-[11px] font-normal text-gray-400 hidden md:block">{job.date[lang]}</span>
+                        </a>
+                    ))}
+                </nav>
             </div>
-        ))}
+        </aside>
     </div>
 </section>
+
+<style>
+    .exp-link.is-active {
+        color: var(--color-primary);
+    }
+    @media (min-width: 768px) {
+        .exp-link.is-active {
+            border-left-color: var(--color-primary);
+        }
+    }
+    .exp-link:not(.is-active) span:first-child {
+        opacity: 0.75;
+    }
+</style>
+
+<script>
+    function initExperienceSpy() {
+        const root = document.querySelector<HTMLElement>('[data-exp-root]');
+        if (!root || root.dataset.spyReady === '1') return;
+        root.dataset.spyReady = '1';
+
+        const panels = Array.from(root.querySelectorAll<HTMLElement>('[data-exp-panel]'));
+        const links = Array.from(root.querySelectorAll<HTMLAnchorElement>('[data-exp-link]'));
+        if (panels.length === 0) return;
+
+        function setActive(id: string) {
+            links.forEach((link) => {
+                link.classList.toggle('is-active', link.dataset.expLink === id);
+            });
+        }
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                const visible = entries
+                    .filter((e) => e.isIntersecting)
+                    .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+                if (visible) {
+                    const id = (visible.target as HTMLElement).dataset.expPanel;
+                    if (id) setActive(id);
+                }
+            },
+            { rootMargin: '-25% 0px -55% 0px', threshold: [0, 0.25, 0.5, 1] }
+        );
+
+        panels.forEach((p) => observer.observe(p));
+        setActive(panels[0].dataset.expPanel || '');
+
+        document.addEventListener('astro:before-swap', () => observer.disconnect(), { once: true });
+    }
+
+    document.addEventListener('astro:page-load', initExperienceSpy);
+</script>

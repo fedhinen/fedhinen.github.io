@@ -2,14 +2,14 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  --color-primary: #111827; /* Dark gray almost black for headings as requested */
-  --color-accent: #6b7280; /* Neutral gray for accents */
-  --color-bg: #FAFAFA; /* Off-white background */
-  --color-text: #1F2937; /* Very dark gray for text, not pure black */
-  --color-text-muted: #6B7280; /* Medium gray */
+  --color-primary: #0a0a0a; /* Near-pure black for headings */
+  --color-accent: #404040;  /* Dark gray for accents */
+  --color-bg: #FFFFFF;
+  --color-text: #111111;    /* Near-black body text for accessibility */
+  --color-text-muted: #444444; /* Darker muted: still secondary but readable */
   --color-bg-card: #FFFFFF;
-  --color-border: #F3F4F6;
-  
+  --color-border: #E5E7EB;
+
   --font-handwriting: "Caveat", cursive;
 }
 
@@ -104,7 +104,8 @@
 @layer base {
   body {
     @apply bg-bg text-text font-sans antialiased font-light;
-    /* Clean background, no noise or gradients by default unless specific to a section */
+    font-size: 16px; /* ~12pt, up from browser default 16px — explicit for clarity */
+    line-height: 1.65;
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -113,6 +114,37 @@
 
   a {
     @apply text-primary hover:text-black transition-all;
+  }
+
+  /* ── Subtle frosted backdrop on elements that sit over the canvas ──
+     Applies only to direct layout containers, not every element.
+     Keeps the effect visible while guaranteeing text contrast. */
+  header, main, footer {
+    position: relative; /* already set via z-10 but making backdrop work */
+    isolation: isolate;
+  }
+
+  /* Section-level text isolation: thin white haze so particles
+     don't bleed into body copy. backdrop-blur is intentionally small.
+     The hero section is excluded — it handles its own contrast on the links. */
+  main section:not(.hero-section) {
+    border-radius: 0;
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    margin-left: -1.5rem;
+    margin-right: -1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    main section:not(.hero-section) {
+      padding-left: 2rem;
+      padding-right: 2rem;
+      margin-left: -2rem;
+      margin-right: -2rem;
+    }
   }
 }
 

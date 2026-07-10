@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
 import { ClientRouter } from 'astro:transitions';
+import DotField from '../components/DotField.astro';
 
 interface Props {
 	title: string;
@@ -31,30 +32,30 @@ const blogLink = lang === 'es' ? '/blog' : '/en/blog';
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
 	</head>
 	<body class="bg-bg text-text min-h-screen flex flex-col selection:bg-black selection:text-white relative overflow-x-hidden font-['Inter',sans-serif]">
-        <!-- Background Grid Pattern -->
-        <div class="fixed inset-0 z-0 pointer-events-none opacity-[0.03]" style="background-image: radial-gradient(#000 1px, transparent 1px); background-size: 24px 24px;"></div>
+        <!-- DotField: full-viewport background effect -->
+        <DotField />
 
-        <header class="py-4 md:py-6 px-4 md:px-8 max-w-5xl mx-auto w-full flex justify-center md:justify-between items-center z-10">
-            <a href={homeLink} class="hidden md:block text-xl font-bold text-primary no-underline hover:opacity-70 transition-opacity tracking-tighter">
+        <header class="py-4 md:py-6 px-4 md:px-8 max-w-5xl mx-auto w-full flex justify-center md:justify-between items-center z-10 relative">
+            <a href={homeLink} class="hidden md:block text-xl font-bold text-primary no-underline hover:opacity-70 transition-opacity tracking-tighter bg-white/60 backdrop-blur-sm px-2 py-0.5 rounded-lg">
                 VR
             </a>
-            <nav class="flex gap-1 md:gap-4 text-xs md:text-sm font-medium items-center bg-white/80 backdrop-blur-sm px-3 md:px-4 py-2 rounded-full border border-black/5 shadow-sm">
-                <a href={homeLink} class="md:hidden hover:text-black hover:bg-gray-100 px-2 py-1.5 rounded-full transition-all text-gray-500" aria-label="Home">
+            <nav class="flex gap-1 md:gap-4 text-xs md:text-sm font-medium items-center bg-white/75 backdrop-blur-md px-3 md:px-4 py-2 rounded-full border border-black/8 shadow-sm text-[#111111]">
+                <a href={homeLink} class="md:hidden hover:text-black hover:bg-white/80 px-2 py-1.5 rounded-full transition-all text-[#444444]" aria-label="Home">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
                 </a>
-                <a href={`${homeLink}#experience`} class="hover:text-black hover:bg-gray-100 px-2 md:px-3 py-1.5 rounded-full transition-all">{t('nav.experience')}</a>
-                <a href={`${homeLink}#projects`} class="hover:text-black hover:bg-gray-100 px-2 md:px-3 py-1.5 rounded-full transition-all">{t('nav.projects')}</a>
-                <a href={blogLink} class="hover:text-black hover:bg-gray-100 px-2 md:px-3 py-1.5 rounded-full transition-all">{t('nav.blog')}</a>
-                <div class="flex gap-2 ml-2 border-l border-gray-200 pl-2">
-                    <a href="/" class={`text-xs font-bold px-2 py-1 rounded transition-colors ${lang === 'es' ? 'bg-black text-white' : 'text-gray-400 hover:text-gray-600'}`}>ES</a>
-                    <a href="/en" class={`text-xs font-bold px-2 py-1 rounded transition-colors ${lang === 'en' ? 'bg-black text-white' : 'text-gray-400 hover:text-gray-600'}`}>EN</a>
+                <a href={`${homeLink}#experience`} class="hover:text-black hover:bg-white/80 px-2 md:px-3 py-1.5 rounded-full transition-all text-[#333333]">{t('nav.experience')}</a>
+                <a href={`${homeLink}#projects`} class="hover:text-black hover:bg-white/80 px-2 md:px-3 py-1.5 rounded-full transition-all text-[#333333]">{t('nav.projects')}</a>
+                <a href={blogLink} class="hover:text-black hover:bg-white/80 px-2 md:px-3 py-1.5 rounded-full transition-all text-[#333333]">{t('nav.blog')}</a>
+                <div class="flex gap-2 ml-2 border-l border-gray-300 pl-2">
+                    <a href="/" class={`text-xs font-bold px-2 py-1 rounded transition-colors ${lang === 'es' ? 'bg-black text-white' : 'text-[#555555] hover:text-black'}`}>ES</a>
+                    <a href="/en" class={`text-xs font-bold px-2 py-1 rounded transition-colors ${lang === 'en' ? 'bg-black text-white' : 'text-[#555555] hover:text-black'}`}>EN</a>
                 </div>
             </nav>
         </header>
-		<main class="flex-1 w-full max-w-5xl mx-auto px-4 md:px-8 py-8 z-10 flex flex-col gap-12">
+		<main class="flex-1 w-full max-w-5xl mx-auto px-4 md:px-8 z-10 relative flex flex-col">
 			<slot />
 		</main>
-        <footer class="py-12 mt-12 text-center text-sm text-gray-400 z-10 border-t border-gray-100">
+        <footer class="py-12 mt-12 text-center text-sm text-[#444444] z-10 relative border-t border-gray-200 bg-white/60 backdrop-blur-sm">
             &copy; {new Date().getFullYear()} Victor Ruiz. {t('footer.rights')}
         </footer>
 	</body>
