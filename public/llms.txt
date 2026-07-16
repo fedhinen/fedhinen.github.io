@@ -1,0 +1,48 @@
+# fedhinen.me
+
+> Portfolio personal de Victor Ruiz — Desarrollador Fullstack.
+
+## Sobre Victor Ruiz
+
+Victor Ruiz es un Desarrollador Fullstack altamente motivado con experiencia demostrada en el diseño, desarrollo y despliegue de aplicaciones web robustas. Actualmente trabaja como Operations Consultant en Xaldigital, gestionando plataformas AWS para múltiples clientes, ejecutando migraciones cloud y optimización de costos (FinOps).
+
+## Experiencia
+
+- **Xaldigital** — Operations Consultant (Abr. 2026 – Presente): Soporte operativo AWS, migraciones cloud, FinOps.
+- **MecanicaMX** — Desarrollador Fullstack (Jun. 2024 – Ene. 2026): Facturación CFDI 4.0, notificaciones con Cloudflare Queues, bot de soporte con n8n, generación de PDF.
+- **SW Argos** — Desarrollador Fullstack (Ene. 2023 – Jun. 2024): Migración de aplicación desktop a web con Spring Boot y React, CI/CD con GitHub Actions.
+
+## Educación
+
+- Universidad Tecnológica de Torreón — TSU en Mecatrónica, Área Automatización (esperado 2028)
+- CONALEP — Técnico Bachiller en Química Industrial (2016–2019)
+
+## Certificaciones
+
+- AWS Certified Cloud Practitioner
+- Meta Full-Stack Engineer Certificate
+- Fortinet Certified Fundamentals Cybersecurity
+
+## Tecnologías
+
+Node.js, TypeScript, Python, Java, Spring Boot, React, SvelteKit, Astro, Flutter, Dart, Zig, Docker, AWS, Cloudflare, PostgreSQL, FastAPI, GitHub Actions, n8n
+
+## Proyectos destacados
+
+- **Zp**: Alternativa al comando cp de Linux, escrito en Zig.
+- **MedIndex**: API de información médica con web scraping automatizado (Spring Boot, Python, PostgreSQL).
+- **Pulse**: Plataforma FaaS autohospedada para ejecutar funciones en contenedores aislados (SvelteKit, FastAPI, Docker).
+- **Todo P2P**: Gestor de tareas Local-First con sincronización P2P sin servidores (Flutter, Dart, CRDT).
+
+## Contacto
+
+- Email: victor.adrian.ruiz.espindola@gmail.com
+- GitHub: https://github.com/fedhinen
+- Web: https://fedhinen.me
+
+## Secciones del sitio
+
+- [Inicio](https://fedhinen.me/)
+- [Proyectos](https://fedhinen.me/projects)
+- [Blog](https://fedhinen.me/blog)
+- [English version](https://fedhinen.me/en)

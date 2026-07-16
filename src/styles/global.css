@@ -1,56 +1,64 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+/* ─── Design Tokens ─── */
 @theme {
-  --color-primary: #0a0a0a; /* Near-pure black for headings */
-  --color-accent: #404040;  /* Dark gray for accents */
+  --color-primary: #0a0a0a;
+  --color-accent: #404040;
   --color-bg: #FFFFFF;
-  --color-text: #111111;    /* Near-black body text for accessibility */
-  --color-text-muted: #333333; /* Darker muted for better readability */
+  --color-text: #111111;
+  --color-text-muted: #333333;
   --color-bg-card: #FFFFFF;
   --color-border: #E5E7EB;
 
   --font-handwriting: "Caveat", cursive;
 }
 
-@layer components {
-  .badge-object {
-    @apply uppercase tracking-widest text-[10px] font-bold px-2 py-1 rounded bg-gray-100 text-gray-500 border border-gray-200 inline-block mb-4;
+/* ─── Base Styles ─── */
+@layer base {
+  body {
+    @apply bg-bg text-text font-sans antialiased font-light;
+    font-size: 16px;
+    line-height: 1.65;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold text-primary tracking-tight;
   }
 
-  .property-grid {
-    @apply grid grid-cols-1 md:grid-cols-2 gap-4 my-8 p-6 bg-white rounded-2xl border border-gray-100 shadow-sm;
-  }
-  
-  .property-item {
-    @apply flex flex-col gap-1;
-  }
-  
-  .property-label {
-    @apply text-xs font-bold text-gray-400 uppercase tracking-wider flex items-center gap-2;
-  }
-  
-  .property-value {
-    @apply text-sm font-medium text-gray-800 flex flex-wrap gap-2 items-center;
+  a {
+    @apply text-primary hover:text-black transition-all;
   }
 
-  .callout {
-    @apply p-6 my-8 rounded-2xl border border-l-4 bg-gray-50/50 text-base leading-relaxed;
-  }
-  
-  .callout-info {
-    @apply border-blue-200 bg-blue-50/30 text-blue-900 border-l-blue-500;
-  }
-  
-  .callout-warning {
-    @apply border-amber-200 bg-amber-50/30 text-amber-900 border-l-amber-500;
+  /* Frosted glass overlay for content on top of DotField canvas */
+  header, main, footer {
+    position: relative;
+    isolation: isolate;
   }
 
-  .backlink-card {
-    @apply p-4 rounded-xl border border-dashed border-gray-300 hover:border-primary/30 hover:bg-gray-50 transition-all cursor-pointer flex gap-4 items-center;
+  main section:not(.hero-section),
+  main .content-panel {
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    margin-left: -1.5rem;
+    margin-right: -1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    main section:not(.hero-section),
+    main .content-panel {
+      padding-left: 2rem;
+      padding-right: 2rem;
+      margin-left: -2rem;
+      margin-right: -2rem;
+    }
   }
 }
 
+/* ─── Prose (Typography for blog/project content) ─── */
 @layer base {
   .prose {
     @apply max-w-none text-text break-words overflow-x-hidden;
@@ -69,7 +77,7 @@
   }
   
   .prose code {
-     @apply font-mono text-sm bg-gray-100 px-1.5 py-0.5 rounded text-pink-600 font-medium;
+    @apply font-mono text-sm bg-gray-100 px-1.5 py-0.5 rounded text-pink-600 font-medium;
   }
   
   .prose pre {
@@ -81,7 +89,7 @@
   }
 
   .prose blockquote {
-    @apply not-italic border-l-4 border-gray-200 pl-6 my-8 text-gray-500 font-normal py-2;
+    @apply not-italic border-l-4 border-gray-200 pl-6 my-8 text-text-muted font-normal py-2;
   }
 
   .prose ul {
@@ -97,85 +105,62 @@
   }
   
   .prose a {
-     @apply font-medium decoration-1 underline-offset-2;
+    @apply font-medium decoration-1 underline-offset-2;
   }
 }
 
-@layer base {
-  body {
-    @apply bg-bg text-text font-sans antialiased font-light;
-    font-size: 16px; /* ~12pt, up from browser default 16px — explicit for clarity */
-    line-height: 1.65;
+/* ─── Component Utilities ─── */
+@layer components {
+  /* Object-style badges (used in blog/project detail pages) */
+  .badge-object {
+    @apply uppercase tracking-widest text-[10px] font-bold px-2 py-1 rounded bg-gray-100 text-text-muted border border-gray-200 inline-block mb-4;
+  }
+
+  .property-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-4 my-8 p-6 bg-white rounded-2xl border border-gray-100 shadow-sm;
   }
   
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-bold text-primary tracking-tight;
+  .property-item {
+    @apply flex flex-col gap-1;
+  }
+  
+  .property-label {
+    @apply text-xs font-bold text-gray-400 uppercase tracking-wider flex items-center gap-2;
+  }
+  
+  .property-value {
+    @apply text-sm font-medium text-gray-800 flex flex-wrap gap-2 items-center;
   }
 
-  a {
-    @apply text-primary hover:text-black transition-all;
+  /* Callouts */
+  .callout {
+    @apply p-6 my-8 rounded-2xl border border-l-4 bg-gray-50/50 text-base leading-relaxed;
+  }
+  
+  .callout-info {
+    @apply border-blue-200 bg-blue-50/30 text-blue-900 border-l-blue-500;
+  }
+  
+  .callout-warning {
+    @apply border-amber-200 bg-amber-50/30 text-amber-900 border-l-amber-500;
   }
 
-  /* ── Subtle frosted backdrop on elements that sit over the canvas ──
-     Applies only to direct layout containers, not every element.
-     Keeps the effect visible while guaranteeing text contrast. */
-  header, main, footer {
-    position: relative; /* already set via z-10 but making backdrop work */
-    isolation: isolate;
+  /* Backlinks / Related objects navigation */
+  .backlink-card {
+    @apply p-4 rounded-xl border border-dashed border-gray-300 hover:border-primary/30 hover:bg-gray-50 transition-all cursor-pointer flex gap-4 items-center;
   }
 
-  main section:not(.hero-section) {
-    border-radius: 0;
-    background: rgba(255, 255, 255, 0.65);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-    margin-left: -1.5rem;
-    margin-right: -1.5rem;
-  }
-
-  @media (min-width: 768px) {
-    main section:not(.hero-section) {
-      padding-left: 2rem;
-      padding-right: 2rem;
-      margin-left: -2rem;
-      margin-right: -2rem;
-    }
-  }
-
-  /* Same treatment for blog/project content wrappers (use .content-panel) */
-  main .content-panel {
-    background: rgba(255, 255, 255, 0.65);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-    margin-left: -1.5rem;
-    margin-right: -1.5rem;
-  }
-
-  @media (min-width: 768px) {
-    main .content-panel {
-      padding-left: 2rem;
-      padding-right: 2rem;
-      margin-left: -2rem;
-      margin-right: -2rem;
-    }
-  }
-}
-
-@layer components {
+  /* Cards */
   .card-soft {
     @apply bg-white rounded-3xl border border-black/5 shadow-xl shadow-black/5;
-    /* Soft, diffuse shadow, rounded corners (24px ~ rounded-3xl) */
     transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
   
   .card-soft:hover {
-     @apply transform -translate-y-1 shadow-2xl shadow-black/10;
+    @apply transform -translate-y-1 shadow-2xl shadow-black/10;
   }
 
+  /* Buttons */
   .btn-pill {
     @apply px-6 py-2 rounded-full font-medium transition-colors border border-black/10 hover:border-black/30 bg-white text-sm text-text whitespace-nowrap;
   }
@@ -184,11 +169,8 @@
     @apply px-6 py-2 rounded-full font-medium transition-colors bg-primary text-white hover:bg-black text-sm whitespace-nowrap shadow-lg shadow-primary/20;
   }
 
+  /* Tags */
   .tag-pill {
     @apply px-3 py-1 rounded-full text-xs font-medium border border-transparent;
   }
-}
-
-.prose {
-  @apply text-text;
 }

@@ -12,7 +12,7 @@ interface Props {
 const { lang } = Astro.props;
 ---
 
-<Layout title="Victor Ruiz - Fullstack Developer Portfolio">
+<Layout title="Victor Ruiz - Fullstack Developer Portfolio" description={lang === 'es' ? 'Victor Ruiz - Desarrollador Fullstack con experiencia en diseño, desarrollo y despliegue de aplicaciones web robustas.' : 'Victor Ruiz - Fullstack Developer with experience in designing, developing, and deploying robust web applications.'}>
     <Hero lang={lang} />
     <Experience lang={lang} />
     <Projects lang={lang} />

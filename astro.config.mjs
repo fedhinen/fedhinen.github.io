@@ -7,7 +7,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://fedhinen.github.io',
+  site: 'https://fedhinen.me',
 
   i18n: {
     defaultLocale: 'es',
