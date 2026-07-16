@@ -1,7 +1,8 @@
 {
-  "name": "Meta Full-Stack Engineer",
-  "issuer": "Meta / Coursera",
+  "name": "Meta Full-Stack Engineer Certificate",
+  "issuer": "Coursera",
   "image": "/assets/certifications/meta-full-stack-engineer-certificate.png",
-  "date": "2024-06-01",
-  "featured": true
+  "date": "2024-08-28",
+  "featured": true,
+  "url": "https://www.credly.com/badges/db9f6219-1829-4a77-961b-8d1a6969e8a8/public_url"
 }

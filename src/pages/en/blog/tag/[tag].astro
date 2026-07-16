@@ -24,7 +24,7 @@ const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDa
 ---
 
 <Layout title={`Blog - #${tag}`}>
-    <section class="py-12">
+    <section class="content-panel py-12">
         <div class="mb-8 flex items-center gap-4">
             <a href="/en/blog" class="text-sm text-gray-500 hover:text-primary">&larr; {t('nav.blog')}</a>
             <h1 class="text-4xl font-bold">#{tag}</h1>

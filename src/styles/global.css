@@ -6,7 +6,7 @@
   --color-accent: #404040;  /* Dark gray for accents */
   --color-bg: #FFFFFF;
   --color-text: #111111;    /* Near-black body text for accessibility */
-  --color-text-muted: #444444; /* Darker muted: still secondary but readable */
+  --color-text-muted: #333333; /* Darker muted for better readability */
   --color-bg-card: #FFFFFF;
   --color-border: #E5E7EB;
 
@@ -124,14 +124,11 @@
     isolation: isolate;
   }
 
-  /* Section-level text isolation: thin white haze so particles
-     don't bleed into body copy. backdrop-blur is intentionally small.
-     The hero section is excluded — it handles its own contrast on the links. */
   main section:not(.hero-section) {
     border-radius: 0;
-    background: rgba(255, 255, 255, 0.55);
-    backdrop-filter: blur(2px);
-    -webkit-backdrop-filter: blur(2px);
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
     padding-left: 1.5rem;
     padding-right: 1.5rem;
     margin-left: -1.5rem;
@@ -140,6 +137,26 @@
 
   @media (min-width: 768px) {
     main section:not(.hero-section) {
+      padding-left: 2rem;
+      padding-right: 2rem;
+      margin-left: -2rem;
+      margin-right: -2rem;
+    }
+  }
+
+  /* Same treatment for blog/project content wrappers (use .content-panel) */
+  main .content-panel {
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    margin-left: -1.5rem;
+    margin-right: -1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    main .content-panel {
       padding-left: 2rem;
       padding-right: 2rem;
       margin-left: -2rem;
